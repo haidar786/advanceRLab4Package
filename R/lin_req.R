@@ -12,6 +12,10 @@ linreq <- function(formula, data) {
 
   degreesOfFreedom <- nrow(data) - ncol(modelMatrixX)
 
+  residualVariance <- (t(residuals) %*% residuals) / degreesOfFreedom
+
+
+
   LinreqClass <- setRefClass("linreq", fields = list(balance = "numeric"))
   a <- LinreqClass$new(balance = 100)
   return(a)
