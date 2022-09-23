@@ -8,7 +8,9 @@ linreq <- function(formula, data) {
 
   fittedValues <- modelMatrixX %*% regressionsCoefficients
 
-  residuals <-
+  residuals <- modelMatrixY - fittedValues == modelMatrixY - (modelMatrixX / regressionsCoefficients)
+
+
 
   LinreqClass <- setRefClass("linreq", fields = list(balance = "numeric"))
   a <- LinreqClass$new(balance = 100)
