@@ -18,10 +18,17 @@ linreq <- function(formula, data) {
 
   tValuesForEachCoefficient <- regressionsCoefficients / (sqrt(varianceRegressionCoefficients))
 
+  pValues <- pt(tValuesForEachCoefficient, degreesOfFreedom)
 
 
-  LinreqClass <- setRefClass("linreq", fields = list(balance = "numeric"))
+  LinreqClass <- setRefClass("linreq", fields = list( "regressionsCoefficients" = regressionsCoefficients,
+                                                      "fittedValues" = fittedValues,
+                                                      "residuals" = residuals,
+                                                      "degreesOfFreedom" = degreesOfFreedom,
+                                                      "residualVariance" = residualVariance,
+                                                      "varianceRegressionCoefficients" = varianceRegressionCoefficients,
+                                                      "tValuesForEachCoefficient" = tValuesForEachCoefficient,
+                                                      "pValues" = pValues))
   a <- LinreqClass$new(balance = 100)
   return(a)
 }
-linreq(4,5)
