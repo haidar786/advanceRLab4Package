@@ -1,1 +1,4 @@
-print("pred")
+pred <- function(data, ...) {
+  fitValue <- data$fittedValues
+  return(fitValue)
+}

@@ -1,4 +1,4 @@
-residuals.linreg <- function(data, ...) {
+residuals <- function(data, ...) {
   rd <- data$residuals
   return(rd)
 }
