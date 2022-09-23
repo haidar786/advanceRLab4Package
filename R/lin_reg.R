@@ -20,6 +20,8 @@ linreg <- function(formula, data) {
 
   pValues <- pt(tValuesForEachCoefficient, degreesOfFreedom)
 
+  call <- match.call()
+
   linreg <- setRefClass("linreg", fields =  list("regressionsCoefficients" = "matrix",
                                                       "fittedValues" = "numeric",
                                                       "residuals" = "matrix",
@@ -37,7 +39,7 @@ linreg <- function(formula, data) {
                         varianceRegressionCoefficients = varianceRegressionCoefficients,
                         tValuesForEachCoefficient = tValuesForEachCoefficient,
                         pValues = pValues,
-                        call = match.call())
+                        call = call)
   return(lr)
 }
 
