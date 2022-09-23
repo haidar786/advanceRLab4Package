@@ -4,7 +4,7 @@ linreq <- function(formula, data) {
   modelMatrixY <- data[all.vars(formula)[1]]
   head(modelMatrix)
 
-  regressionsCoefficients <- (inv(t(modelMatrixX))) %*% (t(modelMatrixX) %*% modelMatrixY)
+  regressionsCoefficients <- (inv(t(modelMatrixX) %*% modelMatrixX)) %*% (t(modelMatrixX) %*% modelMatrixY)
 
   fittedValues <- modelMatrixX %*% regressionsCoefficients
 
@@ -13,6 +13,10 @@ linreq <- function(formula, data) {
   degreesOfFreedom <- nrow(data) - ncol(modelMatrixX)
 
   residualVariance <- (t(residuals) %*% residuals) / degreesOfFreedom
+
+  varianceRegressionCoefficients <- residualVariance %*% (inv(t(modelMatrixX) %*% modelMatrixX))
+
+  tValuesForEachCoefficient <- regressionsCoefficients / (sqrt(varianceRegressionCoefficients))
 
 
 
