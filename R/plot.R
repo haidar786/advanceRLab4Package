@@ -17,7 +17,3 @@ plot <- function(data, ...) {
 
   cowplot::plot_grid(plot1, plot2, ncol = 1, nrow = 2)
 }
-
-data(iris)
-mod_object <- lm(Petal.Length~Species, data = iris)
-plot(mod_object)
