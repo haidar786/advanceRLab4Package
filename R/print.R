@@ -1,9 +1,6 @@
 printA <- function(x, ...) {
-
+  cat("Call: \n")
+  print(x$call)
+  cat("\nCoefficients: \n")
+  print(x$regressionsCoefficients)
 }
-
-
-data(iris)
-mod_object <- linreg(Petal.Length~Species, data = iris)
-
-printA(mod_object)

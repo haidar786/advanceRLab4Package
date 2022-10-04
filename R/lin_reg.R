@@ -1,4 +1,4 @@
-linreg <- function(formula, data) {
+lm <- function(formula, data) {
   modelMatrixX <- as.matrix(model.matrix(formula, data))
   modelMatrixY <- as.matrix(data[all.vars(formula)[1]])
 
