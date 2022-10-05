@@ -1,5 +1,3 @@
-
-
 summary <- function(data, ...) {
   stars <- function(value) {
     if (value > 0.1) return("*")
@@ -7,16 +5,25 @@ summary <- function(data, ...) {
     if (value > 0.001) return("***")
     return(" ")
   }
-  df <- data.frame(matrix(nrow = 0, ncol = 5))
-  names(df) <- c("Estimate", "Std-Error", "t-values", "p-values", " ")
-  df$Estimate <- round(as.vector(data$regressionsCoefficients), 5)
-  df$Std-Error <- round(as.vector(sqrt(data$varianceRegressionCoefficients)), 5)
-  df$t-values <- round(as.vector(data$tValuesForEachCoefficient), 5)
-  df$p-values <- round(as.vector(data$pValues))
-  df$
-  print(df)
+  estimate <- round(as.numeric(data$regressionsCoefficients), 5)
+  se <- round(as.numeric(sqrt(abs(var(data$varianceRegressionCoefficients)) / length(data$varianceRegressionCoefficients))), 5)
+  tValues <- round(as.numeric(data$tValuesForEachCoefficient), 5)
+  pValues <- round(as.numeric(data$pValues), 5)
+  stars <- sapply(data$pValues,
+                  function(x) if(x<0.001) {"***"}
+                  else if (x<0.01) {"**"}
+                  else if (x<0.05) {"*"}
+                  else if (x<0.1) {"."}
+                  else {""})
+
+  df <- as.data.frame(data$regressionsCoefficients)
+  df[,1] <- estimate
+  df[,2] <- se
+  df[,3] <- tValues
+  df[,4] <- pValues
+  df[,5] <- stars
+
+  return(df)
 }
 
-data(iris)
-mod_object <- lm(Petal.Length~Species, data = iris)
-summary(mod_object)
+summary(lm(Petal.Length~Species, data = iris))
