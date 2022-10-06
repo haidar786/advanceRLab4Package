@@ -1,4 +1,4 @@
-printA <- function(x, ...) {
+print.linreg <- function(x, ...) {
   cat("Call: \n")
   print(x$call)
   cat("\nCoefficients: \n")
