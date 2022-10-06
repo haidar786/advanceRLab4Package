@@ -1,4 +1,4 @@
-summary <- function(data, ...) {
+summary.linreg <- function(data, ...) {
   stars <- function(value) {
     switch (value < 0.001, return("***"))
     switch (value < 0.01, return("**"))

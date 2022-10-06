@@ -1,4 +1,4 @@
-pred <- function(data, ...) {
+pred.linreg <- function(data, ...) {
   fitValue <- data$fittedValues
   return(fitValue)
 }

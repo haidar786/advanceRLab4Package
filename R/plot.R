@@ -1,6 +1,6 @@
 library(ggplot2)
 
-plot <- function(data, ...) {
+plot.linreg <- function(data, ...) {
   stR <- sqrt(abs(data$residuals / sqrt(abs(data$residualVariance))))
   df <- data.frame(data$residuals, data$fittedValues, stR)
   plot1 <- ggplot(df, aes(x = data.fittedValues, y = Petal.Length)) +
