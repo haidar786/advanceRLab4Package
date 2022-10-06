@@ -18,7 +18,7 @@ lm <- function(formula, data) {
 
   tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(isPositive(varianceRegressionCoefficients)))
 
-  pValues <- pt(tValuesForEachCoefficient, degreesOfFreedom)
+  pValues <- pt(-abs(tValuesForEachCoefficient), degreesOfFreedom)
 
   call <- match.call()
 

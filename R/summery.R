@@ -1,29 +1,25 @@
 summary <- function(data, ...) {
   stars <- function(value) {
-    if (value > 0.1) return("*")
-    if (value > 0.01) return("**")
-    if (value > 0.001) return("***")
+    switch (value < 0.001, return("***"))
+    switch (value < 0.01, return("**"))
+    switch (value < 0.05, return("*"))
+    switch (value < 0.1, return("."))
     return(" ")
   }
-  estimate <- round(as.numeric(data$regressionsCoefficients), 5)
-  se <- round(as.numeric(sqrt(abs(var(data$varianceRegressionCoefficients)) / length(data$varianceRegressionCoefficients))), 5)
-  tValues <- round(as.numeric(data$tValuesForEachCoefficient), 5)
-  pValues <- round(as.numeric(data$pValues), 5)
-  stars <- sapply(data$pValues,
-                  function(x) if(x<0.001) {"***"}
-                  else if (x<0.01) {"**"}
-                  else if (x<0.05) {"*"}
-                  else if (x<0.1) {"."}
-                  else {""})
-
-  df <- as.data.frame(data$regressionsCoefficients)
-  df[,1] <- estimate
-  df[,2] <- se
-  df[,3] <- tValues
-  df[,4] <- pValues
-  df[,5] <- stars
-
-  return(df)
-}
-
-summary(lm(Petal.Length~Species, data = iris))
+  e <- as.vector(data$regressionsCoefficients)
+  se <- as.vector(sqrt(abs(var(data$varianceRegressionCoefficients)) / length(data$varianceRegressionCoefficients)))
+  tValues <- as.vector(data$tValuesForEachCoefficient)
+  pValues <- as.vector(data$pValues)
+  starsValues <- sapply(data$pValues, stars)
+  roundedValues <- round(c(e, e, e, se, tValues, pValues), 5)
+  roundedValues <- append(roundedValues, starsValues)
+  df <- matrix(roundedValues, ncol = 5)
+  colnames(df) <- c("Estimate", "Std. Error", "t-values", "p-values", "")
+  cat("Call: \n")
+  print(data$call)
+  cat("\n")
+  cat("Coefficients: \n")
+  print(df)
+  cat("---\n")
+  cat("Residual standard error:", se,"on", data$degreesOfFreedom,"degrees of freedom")
+  }
