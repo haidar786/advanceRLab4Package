@@ -3,6 +3,6 @@
 #' @export
 #'
 
-coef.linreg <- function(data, ...) {
+coefA <- function(data, ...) {
   return(data$regressionsCoefficients)
 }

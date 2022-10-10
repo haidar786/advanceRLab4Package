@@ -7,7 +7,7 @@ library(tidyverse)
 #' @export
 #'
 
-plot.linreg <- function(data, ...) {
+plotA <- function(data, ...) {
   stR <- sqrt(abs(data$residuals / sqrt(abs(data$residualVariance))))
   df <- data.frame(data$residuals, data$fittedValues, stR)
   plot1 <- ggplot(df, aes(x = data.fittedValues, y = Petal.Length)) +

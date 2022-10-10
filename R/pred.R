@@ -4,7 +4,7 @@
 #' @export
 #'
 
-pred.linreg <- function(data, ...) {
+predA <- function(data, ...) {
   fitValue <- data$fittedValues
   return(fitValue)
 }

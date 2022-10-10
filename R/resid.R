@@ -4,7 +4,7 @@
 #' @export
 #'
 
-resid.linreg <- function(data, ...) {
+residA <- function(data, ...) {
   rd <- data$residuals
   return(rd)
 }

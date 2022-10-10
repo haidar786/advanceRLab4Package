@@ -33,23 +33,23 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
                                         .self$call <- match.call()
                                       },
                                       print = function() {
-                                       print.linreg(.self)
+                                       printA(.self)
                                       },
                                       pred = function() {
-                                        res <- pred.linreg(.self)
+                                        res <- predA(.self)
                                         return(res)
                                       },
                                       plot = function() {
-                                        plot.linreg(.self)
+                                        plotA(.self)
                                       },
                                       coef = function() {
-                                        coef.linreg(.self)
+                                        coefA(.self)
                                       },
                                       resid = function() {
-                                        resid.linreg(.self)
+                                        residA(.self)
                                       },
                                       summary = function() {
-                                        summary.linreg(.self)
+                                        summaryA(.self)
                                       }
                                     ))
 

@@ -4,7 +4,7 @@
 #' @export
 #'
 
-summary.linreg <- function(data, ...) {
+summaryA <- function(data, ...) {
   stars <- function(value) {
     switch (value < 0.001, return("***"))
     switch (value < 0.01, return("**"))
