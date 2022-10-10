@@ -9,6 +9,9 @@
 \arguments{
 \item{data}{is a data frame}
 }
+\value{
+this function returns residual
+}
 \description{
 resid function shows residual in linreg
 }

@@ -9,6 +9,9 @@ pred.linreg(data, ...)
 \arguments{
 \item{data}{is a data frame}
 }
+\value{
+thios function returns fitted value
+}
 \description{
 pred function shows fitted values in linreg
 }
