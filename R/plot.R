@@ -1,4 +1,11 @@
-library(ggplot2)
+library(tidyverse)
+
+
+#' plot function shows graphical reperentation
+#' @param data is a adata frame
+#' @import tidyverse
+#' @export
+#'
 
 plot.linreg <- function(data, ...) {
   stR <- sqrt(abs(data$residuals / sqrt(abs(data$residualVariance))))

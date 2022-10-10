@@ -1,3 +1,9 @@
+
+#' summary function shows summary of linreg
+#' @param data is a data frame
+#' @export
+#'
+
 summary.linreg <- function(data, ...) {
   stars <- function(value) {
     switch (value < 0.001, return("***"))
