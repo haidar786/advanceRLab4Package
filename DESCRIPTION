@@ -3,7 +3,7 @@ Type: Package
 Title: What the Package Does (Title Case)
 Date: 2022-10-11
 Version: 0.1.0
-Imports: tidyverse, methods, cowplot, gpdf
+Imports: tidyverse, methods, cowplot
 Author: Hussnain & Arfan
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
