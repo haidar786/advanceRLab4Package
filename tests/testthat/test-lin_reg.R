@@ -9,12 +9,11 @@ testthat::test_that("class is correct", {
   testthat::expect_true(class(linreg_mod)[1] == "linreg")
 })
 
-# testthat::test_that("print() method works", {
-#   linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, data=iris)
-#
-#   testthat::expect_output(linreg_mod$print(),"linreg\\(formula = Petal\\.Length ~ Sepal\\.Width \\+ Sepal\\.Length, data = iris\\)")
-#   testthat::expect_output(linreg_mod$print(),"( )*\\(Intercept\\)( )*Sepal\\.Width( )*Sepal\\.Length")
-# })
+testthat::test_that("print() method works", {
+
+  testthat::expect_output(linreg_mod$print(),"linreg\\(formula = Petal\\.Length ~ Sepal\\.Width \\+ Sepal\\.Length, data = iris\\)")
+  # testthat::expect_output(linreg_mod$print(),"( )*\\(Intercept\\)( )*Sepal\\.Width( )*Sepal\\.Length")
+})
 
 testthat::test_that("pred() method works", {
   linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, data=iris)

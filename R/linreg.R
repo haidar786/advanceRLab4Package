@@ -21,7 +21,8 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
                                     varianceRegressionCoefficients = "matrix",
                                     tValuesForEachCoefficient = "matrix",
                                     pValues = "matrix",
-                                    call = "call"),
+                                    call = "formula",
+                                    dataA = "character"),
                       methods = list(
 
                                       initialize = function(formula, data) {
@@ -46,7 +47,9 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
 
                                         .self$pValues <- pt(-abs(tValuesForEachCoefficient), degreesOfFreedom)
 
-                                        .self$call <- match.call()
+                                        .self$call <- formula
+
+                                        .self$dataA <- deparse(substitute(data))
                                       },
 
                                       print = function() {
