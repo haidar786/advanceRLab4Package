@@ -4,7 +4,7 @@
 \alias{residA}
 \title{resid function shows residual in linreg}
 \usage{
-residA(data, ...)
+residA(data)
 }
 \arguments{
 \item{data}{is a data frame}

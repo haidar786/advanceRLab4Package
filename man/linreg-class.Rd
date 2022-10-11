@@ -5,11 +5,6 @@
 \alias{linreg-class}
 \alias{linreg}
 \title{Advance r lab 4 using rc class related to linear regression}
-\arguments{
-\item{formula}{is a formula given as an input}
-
-\item{data}{is a data frame}
-}
 \value{
 class
 }

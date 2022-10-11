@@ -3,7 +3,7 @@
 #' @export
 #'
 
-printA <- function(data, ...) {
+printA <- function(data) {
   cat("Call:\n")
   print(data$call)
   cat("\nCoefficients:\n")

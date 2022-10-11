@@ -4,7 +4,7 @@
 \alias{predA}
 \title{pred function shows fitted values in linreg}
 \usage{
-predA(data, ...)
+predA(data)
 }
 \arguments{
 \item{data}{is a data frame}

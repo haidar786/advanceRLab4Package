@@ -4,7 +4,7 @@
 \alias{summaryA}
 \title{summary function shows summary of linreg}
 \usage{
-summaryA(data, ...)
+summaryA(data)
 }
 \arguments{
 \item{data}{is a data frame}

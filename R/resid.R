@@ -4,7 +4,7 @@
 #' @export
 #'
 
-residA <- function(data, ...) {
+residA <- function(data) {
   rd <- data$residuals
   return(rd)
 }

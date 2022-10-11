@@ -4,7 +4,7 @@
 \alias{printA}
 \title{print function shows linear regression coefficients}
 \usage{
-printA(data, ...)
+printA(data)
 }
 \arguments{
 \item{data}{is a data frame}

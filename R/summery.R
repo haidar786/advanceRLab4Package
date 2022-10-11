@@ -1,10 +1,10 @@
-
 #' summary function shows summary of linreg
 #' @param data is a data frame
+#' @importFrom stats median var
 #' @export
 #'
 
-summaryA <- function(data, ...) {
+summaryA <- function(data) {
   stars <- function(value) {
     switch (value < 0.001, return("***"))
     switch (value < 0.01, return("**"))

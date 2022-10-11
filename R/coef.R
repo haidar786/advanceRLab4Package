@@ -3,6 +3,6 @@
 #' @export
 #'
 
-coefA <- function(data, ...) {
+coefA <- function(data) {
   return(data$regressionsCoefficients)
 }

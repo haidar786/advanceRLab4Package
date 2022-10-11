@@ -4,7 +4,7 @@
 \alias{coefA}
 \title{coef function shows regression coefficients in linreg}
 \usage{
-coefA(data, ...)
+coefA(data)
 }
 \arguments{
 \item{data}{is a data frame}

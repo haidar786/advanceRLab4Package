@@ -4,7 +4,7 @@
 \alias{plotA}
 \title{plot function shows graphical reperentation}
 \usage{
-plotA(data, ...)
+plotA(data)
 }
 \arguments{
 \item{data}{is a adata frame}
