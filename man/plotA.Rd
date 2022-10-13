@@ -7,7 +7,7 @@
 plotA(data)
 }
 \arguments{
-\item{data}{is a adata frame}
+\item{data}{is a a data frame}
 }
 \description{
 plot function shows graphical reperentation

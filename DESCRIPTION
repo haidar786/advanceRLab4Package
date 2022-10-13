@@ -5,7 +5,7 @@ Date: 2022-10-11
 Version: 0.1.0
 Imports: tidyverse, methods, cowplot
 Author: Hussnain & Arfan
-Maintainer: The package maintainer <yourself@somewhere.net>
+Maintainer: The package maintainer <haidar786@github.io>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: GPL-3

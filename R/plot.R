@@ -1,9 +1,9 @@
 library(tidyverse)
-
+library(cowplot)
 
 #' plot function shows graphical reperentation
-#' @param data is a adata frame
-#' @import tidyverse
+#' @param data is a a data frame
+#' @import tidyverse cowplot
 #' @export
 #'
 
@@ -22,5 +22,5 @@ plotA <- function(data) {
          y = expression(sqrt(Standardized~residuals))) +
     stat_summary(fun = mean, color = "red", geom = "line")
 
-  cowplot::plot_grid(plot1, plot2, ncol = 1, nrow = 2)
+  plot_grid(plot1, plot2, ncol = 1, nrow = 2)
 }
