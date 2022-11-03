@@ -25,7 +25,11 @@ summaryA <- function(data) {
   print(data$call)
   cat("\n")
   cat("Coefficients: \n")
-  print(df)
+  cat(e)
   cat("---\n")
   cat("Residual standard error:", se,"on", data$degreesOfFreedom,"degrees of freedom")
   }
+
+data(iris)
+linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, data=iris)
+linreg_mod$summary()
