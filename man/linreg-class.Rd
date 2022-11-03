@@ -9,7 +9,7 @@
 class
 }
 \description{
-Advance r lab 4 using rc class related to linear regression
+Linear regressions functions to calculate some functions
 }
 \section{Fields}{
 
