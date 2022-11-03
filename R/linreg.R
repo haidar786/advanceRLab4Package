@@ -8,6 +8,7 @@
 #' @field tValuesForEachCoefficient a t Values For Each Coefficient
 #' @field pValues a p Values of linreg
 #' @field call is a call of function name
+#' @description Linear regressions functions to calculate some functions
 #' @return class
 #' @import methods
 #' @export

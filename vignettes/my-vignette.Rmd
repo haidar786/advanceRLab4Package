@@ -14,6 +14,191 @@ knitr::opts_chunk$set(
 )
 ```
 
+Import Libraries:
+
 ```{r setup}
-library(advanceRLab4Package)
+library(tidyverse)
+library(cowplot)
 ```
+
+Linear regressions functions to calculate some functions:
+
+```{r linreg}
+linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
+                                    fittedValues = "numeric",
+                                    residuals = "matrix",
+                                    degreesOfFreedom = "numeric",
+                                    residualVariance = "numeric",
+                                    varianceRegressionCoefficients = "matrix",
+                                    tValuesForEachCoefficient = "matrix",
+                                    pValues = "matrix",
+                                    call = "formula",
+                                    dataA = "character"),
+                      methods = list(
+
+                                      initialize = function(formula, data) {
+                                        modelMatrixX <- as.matrix(model.matrix(formula, data))
+                                        modelMatrixY <- as.matrix(data[all.vars(formula)[1]])
+
+                                        .self$regressionsCoefficients <- (solve(t(modelMatrixX) %*% modelMatrixX)) %*% (t(modelMatrixX) %*% modelMatrixY)
+
+                                        .self$fittedValues <- as.vector(modelMatrixX %*% regressionsCoefficients)
+
+                                        .self$residuals <- modelMatrixY - fittedValues
+
+                                        .self$degreesOfFreedom <- nrow(data) - ncol(modelMatrixX)
+
+                                        .self$residualVariance <- as.numeric((t(residuals) %*% residuals) / degreesOfFreedom)
+
+                                        .self$varianceRegressionCoefficients <- as.numeric(residualVariance) * (solve(t(modelMatrixX) %*% modelMatrixX))
+
+                                        isPositive <- function(x) x>=0
+
+                                        .self$tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(isPositive(varianceRegressionCoefficients)))
+
+                                        .self$pValues <- pt(-abs(tValuesForEachCoefficient), degreesOfFreedom)
+
+                                        .self$call <- formula
+
+                                        .self$dataA <- deparse(substitute(data))
+                                      },
+
+                                      print = function() {
+                                       printA(.self)
+                                      },
+
+                                      pred = function() {
+                                        res <- predA(.self)
+                                        return(res)
+                                      },
+
+                                      plot = function() {
+                                        plotA(.self)
+                                      },
+
+                                      coef = function() {
+                                        coefA(.self)
+                                      },
+
+                                      resid = function() {
+                                        residA(.self)
+                                      },
+
+                                      summary = function() {
+                                        summaryA(.self)
+                                      }
+                                    ))
+
+
+```
+
+
+##Functions
+
+coef function shows regression coefficients in linreg:
+
+``` {r}
+coefA <- function(data) {
+  return(data$regressionsCoefficients)
+}
+
+data(iris)
+mod_object <- lm(Petal.Length~Species, data = iris)
+coef(mod_object)
+```
+
+plot function shows graphical reperentation:
+
+```{r}
+plotA <- function(data) {
+  stR <- sqrt(abs(data$residuals / sqrt(abs(data$residualVariance))))
+  df <- data.frame(data$residuals, data$fittedValues, stR)
+  plot1 <- ggplot(df, aes(x = data.fittedValues, y = Petal.Length)) +
+    geom_point(shape = 1) +
+    labs(title = "Residuals vs Fitted Values",
+         x = "Fitted Values", y = "Residuals") +
+    stat_summary(fun = median, color = "red", geom = "line")
+
+  plot2 <- ggplot(df, aes(x = data.fittedValues, y = Petal.Length.1)) +     geom_point(shape = 1) +
+    labs(title = "Scale-Location",
+         x = "Fitted Values",
+         y = expression(sqrt(Standardized~residuals))) +
+    stat_summary(fun = mean, color = "red", geom = "line")
+
+  plot_grid(plot1, plot2, ncol = 1, nrow = 2)
+}
+
+plotA(mod_object)
+```
+
+pred function shows fitted values in linreg:
+
+```{r}
+predA <- function(data) {
+  fitValue <- data$fittedValues
+  return(fitValue)
+}
+
+predA(mod_object)
+```
+
+print function shows linear regression coefficients:
+
+```{r}
+printA <- function(data) {
+  cat("Call:\n")
+  print(paste0("linreg(formula = ", format(data$call), ", data = ", data$dataA, ")"))
+  cat("\nCoefficients:\n")
+  print(as.data.frame(t(data$regressionsCoefficients)))
+}
+
+printA(mod_object)
+```
+
+
+resid function shows residual in linreg:
+
+```{r}
+residA <- function(data) {
+  rd <- data$residuals
+  return(rd)
+}
+
+
+residA(mod_object)
+```
+
+summary function shows summary of linreg:
+
+```{r}
+summaryA <- function(data) {
+  stars <- function(value) {
+    switch (value < 0.001, return("***"))
+    switch (value < 0.01, return("**"))
+    switch (value < 0.05, return("*"))
+    switch (value < 0.1, return("."))
+    return(" ")
+  }
+  e <- as.vector(data$regressionsCoefficients)
+  se <- as.vector(sqrt(abs(var(data$varianceRegressionCoefficients)) / length(data$varianceRegressionCoefficients)))
+  tValues <- as.vector(data$tValuesForEachCoefficient)
+  pValues <- as.vector(data$pValues)
+  starsValues <- sapply(data$pValues, stars)
+  roundedValues <- round(c(e, e, e, se, tValues, pValues), 5)
+  roundedValues <- append(roundedValues, starsValues)
+  df <- matrix(roundedValues, ncol = 5)
+  colnames(df) <- c("Estimate", "Std. Error", "t-values", "p-values", "")
+  cat("Call: \n")
+  print(data$call)
+  cat("\n")
+  cat("Coefficients: \n")
+  print(df)
+  cat("---\n")
+  cat("Residual standard error:", se,"on", data$degreesOfFreedom,"degrees of freedom")
+}
+
+
+summaryA(mod_object)
+```
+
+
