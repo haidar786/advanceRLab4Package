@@ -103,10 +103,11 @@ coefA <- function(data) {
   return(data$regressionsCoefficients)
 }
 
-mod_object <- data(iris)
-mod_object <- linreg$new(Petal.Length~Species, data = iris)
 
-coefA(mod_object)
+data(iris)
+linreg_mod <- linreg$new(Petal.Length~Species, data = iris)
+
+linreg_mod$coef()
 ```
 
 plot function shows graphical reperentation:
@@ -130,7 +131,7 @@ plotA <- function(data) {
   plot_grid(plot1, plot2, ncol = 1, nrow = 2)
 }
 
-plotA(mod_object)
+linreg_mod$plot()
 ```
 
 pred function shows fitted values in linreg:
@@ -141,7 +142,7 @@ predA <- function(data) {
   return(fitValue)
 }
 
-predA(mod_object)
+linreg_mod$pred()
 ```
 
 print function shows linear regression coefficients:
@@ -154,7 +155,7 @@ printA <- function(data) {
   print(as.data.frame(t(data$regressionsCoefficients)))
 }
 
-printA(mod_object)
+linreg_mod$coef()
 ```
 
 
@@ -167,7 +168,7 @@ residA <- function(data) {
 }
 
 
-residA(mod_object)
+linreg_mod$resid()
 ```
 
 summary function shows summary of linreg:
@@ -200,7 +201,8 @@ summaryA <- function(data) {
 }
 
 
-summaryA(mod_object)
+linreg_mod$summary()
+
 ```
 
 
