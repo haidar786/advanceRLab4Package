@@ -1,13 +1,12 @@
 Package: advanceRLab4Package
 Type: Package
 Title: What the Package Does (Title Case)
-Date: 2022-10-11
+Date: 2022-10-18
 Version: 0.1.0
 Imports: tidyverse, methods, cowplot
 Author: Hussnain & Arfan
 Maintainer: The package maintainer <haidar786@github.io>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: A linear regression package which has a rc class which contains print, pred, plot, resid, coef and summary functions.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
