@@ -1,5 +1,6 @@
 ---
-title: "my-vignette"
+title: "Advance r lab 4"
+author: HUSSNAIN & ARFAN
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{my-vignette}
@@ -102,9 +103,10 @@ coefA <- function(data) {
   return(data$regressionsCoefficients)
 }
 
-data(iris)
-mod_object <- lm(Petal.Length~Species, data = iris)
-coef(mod_object)
+mod_object <- data(iris)
+mod_object <- linreg$new(Petal.Length~Species, data = iris)
+
+coefA(mod_object)
 ```
 
 plot function shows graphical reperentation:
