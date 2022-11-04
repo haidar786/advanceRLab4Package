@@ -44,7 +44,7 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
 
                                         isPositive <- function(x) x>=0
 
-                                        .self$tValuesForEachCoefficient <- regressionsCoefficients / (sqrt(varianceRegressionCoefficients))
+                                        .self$tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(varianceRegressionCoefficients))
 
                                         .self$pValues <- pt(-abs(tValuesForEachCoefficient), degreesOfFreedom)
 
