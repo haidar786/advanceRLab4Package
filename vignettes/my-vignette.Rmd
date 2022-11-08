@@ -55,7 +55,7 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
 
                                         isPositive <- function(x) x>=0
 
-                                        .self$tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(varianceRegressionCoefficients))
+                                        .self$tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(pmax(varianceRegressionCoefficients)))
 
                                         .self$pValues <- pt(-abs(tValuesForEachCoefficient), degreesOfFreedom)
 
@@ -94,16 +94,19 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
 
 ##Functions
 
+Test data iris
+
+``` {r}
+data(iris)
+linreg_mod <- linreg$new(Petal.Length~Species, data = iris)
+```
+
 coef function shows regression coefficients in linreg:
 
 ``` {r}
 coefA <- function(data) {
   return(data$regressionsCoefficients)
 }
-
-
-data(iris)
-linreg_mod <- linreg$new(Petal.Length~Species, data = iris)
 
 linreg_mod$coef()
 ```

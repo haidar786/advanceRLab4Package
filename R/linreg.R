@@ -11,7 +11,10 @@
 #' @description Linear regressions functions to calculate some functions
 #' @return class
 #' @import methods
-#' @export
+#' @examples
+#' data(iris)
+#' mod_object <- lm(Petal.Length~Species, data = iris)
+#' @export linreg
 #'
 
 linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
@@ -44,7 +47,7 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
 
                                         isPositive <- function(x) x>=0
 
-                                        .self$tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(varianceRegressionCoefficients))
+                                        .self$tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(pmax(varianceRegressionCoefficients)))
 
                                         .self$pValues <- pt(-abs(tValuesForEachCoefficient), degreesOfFreedom)
 

@@ -34,3 +34,7 @@ Linear regressions functions to calculate some functions
 }}
 
 
+\examples{
+data(iris)
+mod_object <- lm(Petal.Length~Species, data = iris)
+}
