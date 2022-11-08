@@ -55,7 +55,7 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
 
                                         isPositive <- function(x) x>=0
 
-                                        .self$tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(isPositive(varianceRegressionCoefficients)))
+                                        .self$tValuesForEachCoefficient <- as.vector(regressionsCoefficients) / (sqrt(varianceRegressionCoefficients))
 
                                         .self$pValues <- pt(-abs(tValuesForEachCoefficient), degreesOfFreedom)
 
@@ -89,8 +89,6 @@ linreg <- setRefClass("linreg",fields = list(regressionsCoefficients = "matrix",
                                         summaryA(.self)
                                       }
                                     ))
-
-
 ```
 
 
@@ -183,23 +181,23 @@ summaryA <- function(data) {
     return(" ")
   }
   e <- as.vector(data$regressionsCoefficients)
-  se <- as.vector(sqrt(abs(var(data$varianceRegressionCoefficients)) / length(data$varianceRegressionCoefficients)))
-  tValues <- as.vector(data$tValuesForEachCoefficient)
-  pValues <- as.vector(data$pValues)
-  starsValues <- sapply(data$pValues, stars)
-  roundedValues <- round(c(e, e, e, se, tValues, pValues), 5)
-  roundedValues <- append(roundedValues, starsValues)
-  df <- matrix(roundedValues, ncol = 5)
-  colnames(df) <- c("Estimate", "Std. Error", "t-values", "p-values", "")
+  pValues <- as.vector(diag(data$pValues))
+  mat <- matrix(e)
+  se <- sqrt(as.vector(diag(data$varianceRegressionCoefficients)))
+  mat <- cbind(mat, se)
+  mat <- cbind(mat, diag(as.matrix(data$tValuesForEachCoefficient)))
+  mat <- round(mat, 5)
+  mat <- cbind(mat, pValues)
+  mat <- cbind(mat, sapply(pValues, stars))
+  colnames(mat) <- c("Estimate", "Std. Error", "t-values", "p-values", " ")
+  matDF <- as.data.frame(mat)
   cat("Call: \n")
-  print(data$call)
-  cat("\n")
+  cat("linreg(formula = ", paste0(data$call), ", data =", data$dataA,")")
+  cat("\n\n")
   cat("Coefficients: \n")
-  print(df)
-  cat("---\n")
-  cat("Residual standard error:", se,"on", data$degreesOfFreedom,"degrees of freedom")
+  print(matDF)
+  cat("Residual standard error:", sqrt(data$residualVariance),"on", data$degreesOfFreedom,"degrees of freedom")
 }
-
 
 linreg_mod$summary()
 
